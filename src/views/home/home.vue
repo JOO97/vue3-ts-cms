@@ -1,5 +1,8 @@
 <template>
-  <div>home</div>
+  <div>
+    <h1>home</h1>
+    <el-button>button</el-button>
+  </div>
 </template>
 
 <script>
