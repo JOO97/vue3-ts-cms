@@ -8,17 +8,22 @@
 <script>
 import { defineComponent } from 'vue'
 import myRequest from '@/service'
+import localCache from '@/utils/cache'
 
 export default defineComponent({
   setup() {
-    myRequest.request({
-      url: '/login',
-      method: 'POST',
-      data: {
-        name: 'codertest',
-        password: '123456'
-      }
+    localCache.set('user', {
+      name: 'codertest',
+      password: '123456'
     })
+    // myRequest.request({
+    //   url: '/login',
+    //   method: 'POST',
+    //   data: {
+    //     name: 'codertest',
+    //     password: '123456'
+    //   }
+    // })
   }
 })
 </script>
