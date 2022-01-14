@@ -1,8 +1,8 @@
 <template>
   <div class="account-form">
     <el-form label-width="60px" :rules="rules" :model="account" ref="formRef">
-      <el-form-item label="账号" prop="username">
-        <el-input v-model="account.username" />
+      <el-form-item label="账号" prop="name">
+        <el-input v-model="account.name" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="account.password" show-password />
@@ -26,9 +26,10 @@ export default defineComponent({
 
     const lsAccount = localCache.get('user_account')
     const account = reactive({
-      username: lsAccount?.username ?? '',
-      password: lsAccount?.password ?? ''
+      name: lsAccount?.name ?? 'coderwhy',
+      password: lsAccount?.password ?? '123456'
     })
+    store.dispatch('user/accountLogin', { ...account })
 
     const handleLogin = (isKeepPassword: boolean) => {
       formRef.value?.validate((valid) => {
@@ -39,7 +40,7 @@ export default defineComponent({
             localCache.remove('user_account')
           }
           //NOTE:
-          store.dispatch('/user/accountLogin', { ...account })
+          store.dispatch('user/accountLogin', { ...account })
         }
       })
     }

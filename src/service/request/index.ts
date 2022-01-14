@@ -10,11 +10,11 @@ const DEFAULT_SHOW_LOADING = false
 
 //#TODO
 const responseHandler = (res: AxiosResponse): any => {
-  const { data, code } = res.data
-  if (code === 0) {
-    return data
-  }
-  console.log('error')
+  // const { data } = res.data
+  // if (code === 0) {
+  return res.data
+  // }
+  // console.log('error')
 }
 //#TODO
 const httpErrorCodeHandler = (err: any): void => {
@@ -51,13 +51,6 @@ class MyRequest {
     this.instance.interceptors.request.use(
       (config) => {
         if (this.isShowLoading) {
-          console.log(
-            ElLoading.service({
-              lock: true,
-              text: 'loading....',
-              background: 'rgba(0, 0, 0, 0.5)'
-            })
-          )
           this.loading = ElLoading.service({
             lock: true,
             text: 'loading....',
@@ -91,9 +84,7 @@ class MyRequest {
     return new Promise((resolve, reject) => {
       //单个请求的请求拦截器
       if (config.interceptors?.requestInterceptor) {
-        this.instance.interceptors.request.use(
-          config.interceptors.requestInterceptor
-        )
+        config = config.interceptors.requestInterceptor(config)
       }
       this.instance
         .request<any, T>(config)

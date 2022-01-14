@@ -14,5 +14,5 @@ export interface ILoginResult {
 //登录req
 export interface IAccount {
   password: string
-  username: string
+  name: string
 }

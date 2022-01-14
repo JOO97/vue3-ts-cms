@@ -13,7 +13,7 @@ const store = createStore({
 
 //初始化state
 export function initState() {
-  store.dispatch('/user/initState')
+  store.dispatch('user/initState')
 }
 
 export default store
